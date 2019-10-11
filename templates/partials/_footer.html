@@ -1,7 +1,57 @@
 
 <!-- Footer -->
-  <footer id="main-footer" class="py-4  text-white text-center " style="background-color: #0fb9b1;">
-    Copyright &copy;
-    <span class="year"></span> BLOG AND POET  </footer>
+  <footer class="page-footer font-small  ">
+   
+<!--footer links-->
+<div class=" container ">
+<!-- grid view-->
+   <div class="row  text-center d-flex justify-content-center pt-5 mb-3">
+
+<!--grid col1 -->
+   		<div class="col-md-2 mb-2">
+        <h6 class=" font-weight-bold"
+            {% if '/' == request.path%}
+              class=" active mr-3"
+            {% else %}
+              class=" mr-3"
+            {%endif%} >
+            <a  href="{%url 'index'%}">Home</a>
+          </h6></div>
+
+<!--grid col2 -->
+          <div class="col-md-2 mb-2">
+           <h6 class=" font-weight-bold"
+             {% if 'about' in request.path%}
+              class="active mr-3"
+            {% else %}
+              class="mr-3"
+            {%endif%}
+            >
+            <a  href="{% url 'about'%}">About</a>
+          </h6>
+        </div>
+        <!--grid col2 -->
+          <div class="col-md-2 mb-2 ">
+           <h6 class=" font-weight-bold">
+            <a  href="{% url 'index'%}">Login</a>
+          </h6>
+        </div>
+        <!--grid col2 -->
+          <div class="col-md-2 mb-2 ">
+           <h6 class=" font-weight-bold">
+            <a  href="{% url 'index'%}">SighnUp</a>
+          </h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="{% url 'index' %}"> (:- POW :-)</a>
+  </div>
+
+
+
+</footer>
 
 

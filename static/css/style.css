@@ -12,9 +12,7 @@ img {
   
   opacity: 0.9;
   text-transform: uppercase; }
- .card {
- 	background-color: transparent;
- }
+
  .hr-text{
   line-height: 1em;
   position: relative;
