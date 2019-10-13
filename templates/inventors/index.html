@@ -11,27 +11,26 @@
 				<h4>Thought of the day</h4>
 				<hr class="mr-2 ml-2">
 			</div>
-				
 		</div>
 
 <!-- Weekly Best poem section -->
 		<div class="col-md-3 ml-5">
 			<div class="card" style="height: 500px;">
-				<h4>Best of the week</h4>
+				<h4>Poem of the week</h4>
 				<hr class="mr-2 ml-2">
 			</div>
 				
 		</div>
 
-<!-- Section for LOgin and Singnup-->
+<!-- Section for LOgin and Singnup -->
 		<div class="col-md-4 ml-5">
 			<div class="card" >
-				<p style="font-family:  Segoe UI; font-size: 25px; "> WLECOME WRITERS</p>
-					<hr>
+				<h4 style=" font-family:  Segoe UI;"> WLECOME WRITERS </h4>
+					<hr class="mr-2 ml-2">
+					<p style="font-family: Segoe UI; font-size: 15px;"><b> Are you a Writers or poet or a good thinker, so Friend this place is for u to express your self.</b></p>
 
-				<p style="font-family: Segoe UI; font-size: 15px;"><b> Are you a Witers or poet or a good thinker, so Friend this place is for u to express your self.</b></p>
-
-<!-- Login form-->
+<!-- Login form -->
+			
 			<form class="mr-2 ml-2 pb-2 ">
 				<div class="form-group form-text text-left">
 				
@@ -47,11 +46,11 @@
 				<a href="{% url 'about' %}" style="padding-bottom: 10px; ">
 				<button  type="button" class=" btn btn-success btn-lg">Login</button>
 				</a>
-			
-				<b> OR</b>
-<!-- Sighnup  -->
+				<b class="mr-2 ml-2"> OR </b>
 
-				<a href="{% url 'index' %}">
+<!-- Sighnup -->
+
+				<a href="{% url 'signup' %}">
 				<button type="button" class="btn btn-success btn-lg">SignUp</button>
 				</a>
 				</form>
