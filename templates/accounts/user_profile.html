@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}|feed{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section>
+	<div class="continer bg-light px-2">
+		<div class="row mx-3 pb-2 pt-2">
+			<div class="col-md-3 ">
+
+<!-- Profile-->
+				<div class="card bg-white">
+					<h6 class="card-title mx-2 text-center">Profile</h6>
+						<div class="card-body">
+							<a href="{% url 'profile' %}" class="card-link" >
+								<p class="text-center"><b>{{user.username}}</b></p>
+							</a>
+							<div class="card-body text-center bg-light" >
+								<a href="{%url 'edit_profile' %}" class="card-link">Edit Profile <i class="fas fa-pen"></i></a>
+							</div>
+							<p><b>Description
+								{{ profile.bio }}
+							</b></p>			 	
+							</div>
+						</div>
+				</div>
+
+<!--Profile Feed-->
+			<div class="col-md-8 mx-auto">
+				<div class="card bg-white">
+					<div class="card-body">
+						<div class="row mx-auto">
+							<div class="col-2 text-center">
+								<a href="" class="card-link"><h6>Post</h6></a>
+								<p>No. Of Post</p>
+							</div>
+							<div class="col-3 text-center">
+								<a href="" class="card-link"><h6>Followers</h6></a>
+								<p>Followers =</p>
+
+							</div>
+							<div class="col-3 text-center">
+								<a href="" class="card-link"><h6>Following</h6></a>
+								<p>Followers =</p>
+
+
+							</div>
+							<div class="col-3 text-center">
+								<a href="" class="card-link"><h6>Events Participated</h6></a>
+							</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+	
+</div>
+</section>
+
+	
+{% endif %}
+
+
+
+
+
+{% endblock %}

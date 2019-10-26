@@ -16,22 +16,22 @@
   	<link rel="stylesheet" href="{% static 'css/style.css'%}">
 	<!-- Lightbox -->
   	<link rel="stylesheet" href="{% static 'css/lightbox.min.css'%}">
-	<title>{% block title %}Blog_Poet{% endblock %}	</title>
+	<title>POW{% block title %}{% endblock %}	</title>
 
 
 </head>
 <body>
 
 
-	<!--topbar-->
-	{% include 'partials/_topbar.html' %}
+
 	<!--navbar-->
 	{% include 'partials/_navbar.html' %}
 
 	{% block content %}
 
 	{% endblock %}
-
+	<!-- Bottom Buttns -->
+	{% include 'partials/_bottom.html' %}
 
 	<!--footer-->
 	{% include 'partials/_footer.html' %}

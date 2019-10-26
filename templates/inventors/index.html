@@ -7,53 +7,74 @@
 		
 <!-- Thought of the day section-->
 		<div class="col-md-3 ml-5">
-			<div class="card" style="height: 500px;">
-				<h4>Thought of the day</h4>
+			<div class="card bg-light" style="height: 500px;">
+				<div class="card-body card-title">
+				<h4 >Performers of Month</h4>
 				<hr class="mr-2 ml-2">
+			</div>
 			</div>
 		</div>
 
 <!-- Weekly Best poem section -->
 		<div class="col-md-3 ml-5">
-			<div class="card" style="height: 500px;">
-				<h4>Poem of the week</h4>
+			<div class="card bg-light" style="height: 500px;">
+				<div class="card-body ">
+				<h4 class="card-title">Poem of the week</h4>
 				<hr class="mr-2 ml-2">
+			</div>
 			</div>
 				
 		</div>
 
 <!-- Section for LOgin and Singnup -->
 		<div class="col-md-4 ml-5">
-			<div class="card" >
-				<h4 style=" font-family:  Segoe UI;"> WLECOME WRITERS </h4>
+			<div class="card bg-light" >
+				<div class="card-body">
+				<h4  class="card-title"> WLECOME WRITERS </h4>
 					<hr class="mr-2 ml-2">
-					<p style="font-family: Segoe UI; font-size: 15px;"><b> Are you a Writers or poet or a good thinker, so Friend this place is for u to express your self.</b></p>
+				</div>
+					<p style="font-family: Segoe UI; font-size: 15px;"><b> Are you a Writers or poet or a good story teller, so Friend this place is for u to express your self.</b></p>
 
 <!-- Login form -->
-			
-			<form class="mr-2 ml-2 pb-2 ">
+			{% include 'partials/_alerts.html'%}
+			<form class="mr-2 ml-2 pb-2 "action="{% url 'index' %}" method="POST">
+				{% csrf_token %} 
 				<div class="form-group form-text text-left">
 				
-					<label for="exampleInputEmailid1"> Email </label>
-					<input type="email" class="form-control" id="exampleInputEmailid1" area-describedby="emailhelp" placeholder="Enter Email">
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
+					<label for="email"> User Name </label>
+					<input type="varchar" name="username"class="form-control" id="username" area-describedby="username" placeholder="username">
+					<small id="username" class="form-text text-muted">We'll never share your username with anyone else.
 					</small>
 				</div>
 				<div class="form-group text-left">
-   					 <label for="exampleInputPassword1">Password</label>
-   					 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+   					 <label for="password">Password</label>
+   					 <input type="password" name="password" class="form-control"  placeholder="Enter password">
+   					 <small class="form-text text-muted">We'll never share your password with anyone else.
+					</small>
   					</div>
-				<a href="{% url 'about' %}" style="padding-bottom: 10px; ">
-				<button  type="button" class=" btn btn-success btn-lg">Login</button>
-				</a>
+					<button  type="submit" value="login" class=" btn btn-success btn-lg">Login</button>
 				<b class="mr-2 ml-2"> OR </b>
 
 <!-- Sighnup -->
 
 				<a href="{% url 'signup' %}">
-				<button type="button" class="btn btn-success btn-lg">SignUp</button>
+					<button type="button" class="btn btn-success btn-lg">SignUp</button>
 				</a>
 				</form>
+
+
+				<div class="row mr-2 ml-2">
+					<div class="col"><hr></div>
+					<div class="col-auto">OR</div>
+					<div class="col"><hr></div>
+				</div>
+					<small id="emailHelp" class="form-text text-muted"><b>Login with</b>
+					</small>
+					<p>
+						<a href="" class="btn btn-danger btn-google"><i class="fab fa-google"></i> Google</a>
+
+						<a href="" class="btn btn-primary btn-facebook"><i class="fab fa-facebook"></i> Facebook</a>
+					</p>
 				
 			</div>	
 

@@ -1,15 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
+<section>
+	<div class="container">
+	<div class="card bg-light">
+		<article class="card-body mx-auto" style="max-width: 400px;">
+			<h3 class="card-title mt-3 text-center">Create Account</h3>
+			<p>
+				<a href="" class="btn btn-info btn-twitter"><i class="fab fa-twitter"></i>Login with twitter</a>
+				<a href="" class="btn btn-primary btn-facebook"><i class="fab fa-facebook"></i> Login with facebook</a>
+			</p>
+			<div class="row">
+				<div class="col"><hr></div>
+				<div class="col-auto">OR</div>
+				<div class="col"><hr></div>
+			</div>
+<!--form -->
+{% include 'partials/_alerts.html'%}
+		<form  action="{% url 'signup' %}" method="POST">
+			{% csrf_token %}  <!-- security -->
+			
+			<div class="card">
+			<div class="form-group form-text  mr-2 ml-2 ">
+				
+				<label for='username'><b>Username</b></label>
+				<input type="text" name="username" class="form-control" placeholder="Enter username" required>
 
-<form>
-	<div class="card mr-5 ml-5">
-	<div class="form-group mr-5 ml">
-		
-		<label for="exampleInputEmailid1"> Email </label>
-		<input type="email" class="form-control" id="exampleInputEmailid1" area-describedby="emailhelp" placeholder="Enter Email">
-	</div>
-	</div>
-</form>
+				<label for='password'><b>Password</b></label>
+				<input type="password" name="password" class="form-control" placeholder="password" required>
 
+				<label for='conf_password'><b>Confrim Password</b></label>
+				<input type="password" name="conf_password" class="form-control" placeholder="Enter password again" required>
+				<br>
+				<div class="text-center"><button type="submit" class="btn btn-success btn-lg">Signup</button></div>
+					
+
+				</div>
+			</div>
+		</div>
+
+		</form>
+
+</article>
+</div>
+</div>
+</section>
 
 {% endblock %}

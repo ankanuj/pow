@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}|feed{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section>
+	<div class="continer bg-light px-2">
+		<div class="row mx-3 pb-2 pt-2">
+			<div class="col-md-3 ">
+		
+
+<!--Suggestions-->
+					<div class="card bg-white ">
+
+						<h5 class="card-titleaa text-center">Suggestions</h5>
+						<hr>
+						<div class=" card-body text-center">
+							<b>See More</b> 	
+
+						</div>
+					</div>
+						<br>
+
+<!-- Events-->
+						<div class="card bg-white">
+							<h6 class="card-title mx-2 text-center">Events</h6>
+							<div class="card-body">
+								<a href="" class="card-link">
+									<b>Poems</b>
+										</a>
+									<br>
+					
+								<a href="" class="card-link">
+									<b> competitive area </b> 	</a>			 
+									<br>	
+								<a href="" class="card-link">
+									<b> Performers of the month</b></a>
+							</div>
+						</div>
+						<br>
+
+<!--Footer section -->
+					<div class="card bg-white">
+					<p>
+            				<a  href="{% url 'about'%}">Aboutus</a>
+          					
+
+          				<p>
+          					<a href="{% url 'feed' %}">Home</a></p></p>
+
+          					<p class="footer-copyright text-center py-3">Copyright &copy;
+    						<span class="year"></span>
+    						<a href="{% url 'feed' %}"> (:- POW :-)</a>
+							</p>
+							
+ 
+					</div>
+					</div>
+
+			<div class="col-md-7 mx-auto">
+				<div class="card bg-white">
+					<div class="card-body">
+						<p><a href="{% url 'profile' %}" class="card-link"><b>{{ user.username }}</b> </a></p>
+						
+								<img style="max-height: 400px; max-width: auto;" src="{% static 'img/lamp.jpg' %}">
+							</div>
+							<div class="card-body">
+								<button type="button" class="btn btn-sm bg-light"><i class="fas fa-comment"></i></button>
+							</div>
+			</div>
+
+
+		</div>
+
+</div>
+	
+</div>
+</section>
+
+
+{% endif %}
+
+
+{% endblock %}

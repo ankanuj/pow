@@ -19,13 +19,17 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'inventors.apps.InventorsConfig',
     'registration.apps.RegistrationConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,8 +67,11 @@ WSGI_APPLICATION = 'blog_poet.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pow',
+        'USER':'postgres',
+        'PASSWORD':'Anuj123',
+        'HOST':    'localhost',
     }
 }
 
@@ -109,3 +116,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[ 
     os.path.join(BASE_DIR,'blog_poet/static'),
 ]
+
+
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    
+}

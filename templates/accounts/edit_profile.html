@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}|feed{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section>
+	<div class="continer bg-light px-2">
+		<div class="row mx-3 pb-2 pt-2">
+			<div class="col-md-3 ">
+
+<!-- Profile-->
+				<div class="card bg-white">
+					<h6 class="card-title mx-2 text-center">Profile</h6>
+						<div class="card-body">
+							<a href="{% url 'profile' %}" class="card-link" >
+								<p class="text-center"><b>{{user.username}}</b></p>
+							</a>
+							<div class="card-body">
+								<form method="Post">
+									<div class="form-group">
+										<label for="ProfiePicture"> Upload picture</label>
+										<input type="file" name="profilepicture" class="form-control-file">
+									</div>
+									<div class="text-center pb-2"><button type="submit" class="btn btn-success ">Save</button></div>
+								</form>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="card bg-white">
+					<div class="card-body">
+						<form method="POST" action=" ">
+							{% csrf_token %}  <!-- security -->
+			
+							<div class="card">
+
+							
+
+							<div class="form-group form-text  mr-2 ml-2 ">
+								<label for='first_name'><b>First name</b></label>
+								<input type="text" name="first_name" class="form-control" placeholder="First name" required>
+							</div>
+
+							<div class="form-group form-text  mr-2 ml-2 ">
+								<label for='last_name'><b>Last name</b></label>
+								<input type="text" name="last_name" class="form-control" placeholder="Last name" required>
+							</div>
+
+							<div class="form-group form-text  mr-2 ml-2 ">
+
+								<label for='email'><b>Email</b></label>
+								<input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+							</div>
+							<div class="form-group form-text  mr-2 ml-2 ">
+
+								<label for='phone'><b>Phone</b></label>
+								<p>
+									<select > 
+									<option selected="">+91</option>	
+									<option value="1">+971</option>
+									<option value="2">+108</option>
+									<option value="3">+701</option>
+									<option value="4">+198</option>
+								</select>
+								<input type="text" class="form-control" name="phone" placeholder="Enter phone" required></p>
+								</div>
+								
+								<div class="form-group form-text  mr-2 ml-2 ">
+									<label for="bio">About You.</label>
+									<textarea  name="bio" rows="6" class="form-control" placeholder="Enter About your Self" ></textarea> 
+								</div>
+								<br>
+								<div class="text-center pb-2"><button type="submit" class="btn btn-success btn-lg">Save</button></div>
+									
+
+								</div>
+							</div>
+						</div>
+
+		</form>
+						
+					</div>
+				</div>
+			</div>
+
+
+
+</div>
+	
+</div>
+</section>
+
+
+
+
+{% endblock %}
