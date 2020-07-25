@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate
 
 
 def index(request):
+	
+	if request.user.is_authenticated:
+		return redirect('feed')
 	if request.method=='POST':
 		
 		username = request.POST['username']
@@ -26,3 +29,6 @@ def index(request):
 
 def about(request):
 	return render(request,'inventors/about.html')
+
+def poems(request):
+	return render(request,'inventors/poems.html')

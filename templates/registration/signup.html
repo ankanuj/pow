@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
 {% block content %}
 <section>
 	<div class="container">
-	<div class="card bg-light">
+	<div class="card bg-light border-0">
 		<article class="card-body mx-auto" style="max-width: 400px;">
 			<h3 class="card-title mt-3 text-center">Create Account</h3>
-			<p>
-				<a href="" class="btn btn-info btn-twitter"><i class="fab fa-twitter"></i>Login with twitter</a>
-				<a href="" class="btn btn-primary btn-facebook"><i class="fab fa-facebook"></i> Login with facebook</a>
+			<p >
+				<center>
+				<a href="{% provider_login_url "google" %}"  class="btn btn-danger btn-google"><i class="fab fa-google"></i> Login with Google</a>
+			</center>
+				<!--<a href="" class="btn btn-primary btn-facebook"><i class="fab fa-facebook"></i> Login with facebook</a>-->
 			</p>
 			<div class="row">
 				<div class="col"><hr></div>
@@ -19,23 +23,39 @@
 		<form  action="{% url 'signup' %}" method="POST">
 			{% csrf_token %}  <!-- security -->
 			
-			<div class="card">
+			<div class="card " style="width: 400px;">
 			<div class="form-group form-text  mr-2 ml-2 ">
 				
 				<label for='username'><b>Username</b></label>
 				<input type="text" name="username" class="form-control" placeholder="Enter username" required>
+			</div>
+			<div class="form-group form-text  mr-2 ml-2 ">
+				<label for='first_rname'><b> First name</b></label>
+				<input type="text" name="first_name" class="form-control" placeholder="Enter first name" required>
+			</div>
 
+				<div class="form-group form-text  mr-2 ml-2 ">
+
+				<label for='last_name'><b>Last name</b></label>
+				<input type="text" name="last_name" class="form-control" placeholder="Enter last name" required>
+
+			</div>
+				<div class="form-group form-text  mr-2 ml-2 ">
+
+					<label for='email'><b>Email</b></label>
+					<input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+				</div>
+				<div class="form-group form-text  mr-2 ml-2 ">
 				<label for='password'><b>Password</b></label>
 				<input type="password" name="password" class="form-control" placeholder="password" required>
-
+			</div>
+			<div class="form-group form-text  mr-2 ml-2 ">
 				<label for='conf_password'><b>Confrim Password</b></label>
 				<input type="password" name="conf_password" class="form-control" placeholder="Enter password again" required>
-				<br>
-				<div class="text-center"><button type="submit" class="btn btn-success btn-lg">Signup</button></div>
-					
-
-				</div>
 			</div>
+				<br>
+				<div class="text-center"><button type="submit" class="btn btn-success btn-lg">Signup</button></div>			
+			<br>
 		</div>
 
 		</form>

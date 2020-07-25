@@ -1,0 +1,126 @@
+{% extends 'accounts/User_feed.html' %}
+{% load static %}
+{% block post %}
+{%  if post %}
+     
+<div class="container">
+    {% if post.user == request.user %}
+        <div class="dropdown">
+            <button type="button" class="btn bg-white " data-toggle="dropdown" style="float:right;"><i class="fas fa-ellipsis-v " style="font-size: 20px;"></i></button>
+                <div class="dropdown-menu">
+                    <a type="button" class="btn dropdown-item" href="{% url 'edit_post' pk=post.pk %}">edit</a>
+                    <a type="button" class="btn dropdown-item" href="#">share</a>
+                    <a type="button" class="btn dropdown-item" href="{% url 'delete_post' pk=post.pk %}">Delete</a>
+                </div>
+        </div>
+    {%else%}
+    <div class="dropdown">
+        <button type="button" class="btn bg-white " data-toggle="dropdown" style="float:right;"><i class="fas fa-ellipsis-v " style="font-size: 20px;"></i></button>
+            <div class="dropdown-menu">
+                <a type="button" class="btn dropdown-item" href="#">share</a>
+                <a type="button" class="btn dropdown-item" href="#">report</a>
+            </div>
+    </div>
+    {% endif %}
+    <p><a href="{% url 'profile_with_pk' pk=post.user_id %}">
+        {% if post.user.profile_photo.profile_photo %}
+            <img src="{{post.user.profile_photo.profile_photo.url}}" class="rounded-circle" id="user_img2">
+        {% else %}
+            <img src="{% static 'img/profile.jpg' %}" class="rounded-circle" id="user_img2">
+        
+        {% endif %}
+        <b>{{post.user.username}}</b> 
+        </a> 
+        {% if post.photo %} <code>{{ post.post_date }}</code>  {% endif %}
+        </p>
+        <center>
+            <img class="card-img mx-auto " style=" max-width:600px; max-height: 300px;" src="{{post.photo.url}}">
+        </center>
+        <div class="card-body">
+            <span style="font-size: 2em; ">
+                <i class="far fa-thumbs-up mr-3"></i>
+                <i class="far fa-comment mr-2"></i>
+                
+          </span>
+          <div class="card border-0">
+            <blockquote class="blockquote mb-0">
+                <p>view all comments {{comment.count}}</p>
+                {% for comment in comment %}
+                <header class="blockquote-footer">
+                    <cite title="Source Title">
+                            {% if comment.user.profile_photo.profile_photo %}
+                                <img src="{{comment.user.profile_photo.profile_photo.url}}" class="rounded-circle" id="user_img">
+                            {% else %}
+                                <img src="{% static 'img/profile.jpg' %}" class="rounded-circle" id="user_img">
+                            
+                            {% endif %}
+                            <a  class="card-link"  href="{% url 'profile_with_pk' pk=comment.user.pk %}">
+                                <b>{{comment.user.username}}</b>
+                            </a>
+                            <code>{{ comment.com_date }}</code> 
+                    </cite>
+                </header>
+                <p class="ml-5">{{comment.comment  }}  </p>
+                    <div class="card-body pt-1 bg-light ">
+                        {% if comment.replies.all %}
+                            <h6>Replies <code>{{ comment.replies.all.count }}</code><h6>
+                                {% for reply in comment.replies.all %}
+                                    {% if reply in comment.replies.all %}
+                                        
+                                        <div class="card-body border-0 pt-0">
+                                            <div class="container  pt-0">
+
+                                                <header class="blockquote-footer"><cite title="Source Title">
+                                                    {% if reply.user.profile_photo.profile_photo %}
+                                                            <img src="{{reply.user.profile_photo.profile_photo.url}}" class="rounded-circle" id="user_img">
+                                                        {% else %}
+                                                            <img src="{% static 'img/profile.jpg' %}" class="rounded-circle" id="user_img">
+                                                        
+                                                        {% endif %}
+                                                    <a  class="card-link"  href="{% url 'profile_with_pk' pk=comment.user.pk %}">
+                                                   <b> {{reply.user}} </b></a><code>{{ reply.com_date }}</code> </cite></header>
+                                                <p class="ml-2">{{reply.comment  }}  </p>
+                                            
+                                            </div>
+                                        
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                        {% endif %}
+                         <!--Submit Replies-->
+                         <div id="reply" class=" replied-comments container border-0 bg-white" >                                   
+                            <form method="POST" action="{% url 'reply' pk=post.pk %}">
+                                {%csrf_token%}
+                                <div class="form-group row">
+                                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                    <input name="comment" class="form-control border" type="text" placeholder="make reply" required >
+                                    <button class="btn btn-outline-info  bg-white form-control" type="submit">reply</button>
+                                </div>   
+                            </form>
+                    </div>
+                    
+                    </div>  
+                {% endfor %}
+            </blockquote>
+            </div>
+        </div>
+
+    <div class="container"> 
+     
+        <form method="POST" >
+         {%csrf_token%}
+            <div class="form-group">
+                
+                <input name="comment" class="form-control" type="text" placeholder="make comment" required >
+                <button class="btn btn-outline-info bg-white form-control" type="submit">comment</button>
+            </div>   
+            </form>
+    </div>
+</div>
+<br> 
+
+{% endif %}
+{% endblock %}
+{% block suggestions %}		
+
+{% endblock %}

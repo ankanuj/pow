@@ -5,10 +5,18 @@
     <div class="container">
     	{% if user.is_authenticated %}
       		<a class="navbar-brand" href="{%url 'feed' %}">
+            <h2>
+              <p style=" font-style: italic; font-family: cursive;">Power Of Writing..</p>
+                </h2>
         {% else %}
      	 	<a class="navbar-brand" href="{%url 'index' %}">
+          <h2>
+            <p style=" font-style: italic; font-family: cursive;">Power Of Writing..</p>
+              </h2>
         {% endif %}
-        <img src="{%static 'img/logo1.png'%}" class="logo" alt="" style="height: 50px; width: 180px;">
+        <!--<img src="{%static 'img/logo1.png'%}" class="logo" alt="" style="height: 50px; width: 180px;">
+        -->
+        
       </a>
      
       

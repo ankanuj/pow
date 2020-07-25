@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{%load static%}
 
-{% block title %}|feed{% endblock %}
+{% block title %}|Edit Profile{% endblock %}
 
 
 {% block content %}
@@ -11,49 +12,83 @@
 			<div class="col-md-3 ">
 
 <!-- Profile-->
-				<div class="card bg-white">
-					<h6 class="card-title mx-2 text-center">Profile</h6>
-						<div class="card-body">
+				<div class="card"  style="box-shadow: 4px 4px 20px #898694;" >
+					<h6 class="card-title  mx-2 text-center" >Profile</h6>
+						<div class="card-body bg-white">
 							<a href="{% url 'profile' %}" class="card-link" >
-								<p class="text-center"><b>{{user.username}}</b></p>
-							</a>
-							<div class="card-body">
-								<form method="Post">
-									<div class="form-group">
-										<label for="ProfiePicture"> Upload picture</label>
-										<input type="file" name="profilepicture" class="form-control-file">
+								<center>
+									<div  class="rounded-circle">
+										{% if photo.profile_photo %}
+								<img src="{{photo.profile_photo.url}}" class="rounded-circle">
+							{% else %}
+								<img src="{% static 'img/profile.jpg' %}" class="rounded-circle" >
+							{% endif %}
 									</div>
-									<div class="text-center pb-2"><button type="submit" class="btn btn-success ">Save</button></div>
-								</form>
+								</center>
+								<p class="text-center"><b>{{user.username}}</b></p>
+						</a>
+<!--Upload Image-->
+							<div class="card-body">
+						<!-- Button to Open the Modal -->
+								<center>
+								<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">
+									Upload Image
+								  </button>
+								</center>
+  
+  									<!-- The Modal -->
+  								<div class="modal" id="myModal">
+									<div class="modal-dialog">
+	  									<div class="modal-content">
+  
+									<!-- Modal Header -->
+										<div class="modal-header">
+		  									<h4 class="modal-title">Upload Image</h4>
+		  									<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+  
+									<!-- Modal body -->
+										<div class="modal-body">
+											<form method="POST" action="upload_image " enctype="multipart/form-data">
+												{% csrf_token %}  <!-- security -->
+												
+												<div class="container">
+													<input type="file"name="profile_photo" class="form-control-file ">
+													<br>
+													<button type="submit" class="btn btn-danger">upload</button>
+
+												</div>
+											</form>
+										</div>
+	  								</div>
+								</div>
+  							</div>
 							</div>
 						</div>
 				</div>
 			</div>
-			<div class="col-md-7">
-				<div class="card bg-white">
-					<div class="card-body">
-						<form method="POST" action=" ">
+			<div class="col-md-7 pb-4">
+				<div class="card  border-0"  style="box-shadow: 4px 4px 20px #898694;" >
+					<div class="card-body ">
+						<form method="POST"  action="user_edit_profile ">
 							{% csrf_token %}  <!-- security -->
-			
-							<div class="card">
-
-							
-
-							<div class="form-group form-text  mr-2 ml-2 ">
+							<div class="card border-0">
+							<div class="form-group form-text  mr-2 ml-2 " >
 								<label for='first_name'><b>First name</b></label>
-								<input type="text" name="first_name" class="form-control" placeholder="First name" required>
+								<input type="text" name="first_name" class="form-control" placeholder="First name" value="{{user.first_name}}">
 							</div>
 
 							<div class="form-group form-text  mr-2 ml-2 ">
 								<label for='last_name'><b>Last name</b></label>
-								<input type="text" name="last_name" class="form-control" placeholder="Last name" required>
+								<input type="text" name="last_name" class="form-control" placeholder="Last name" value="{{user.last_name}}" >
 							</div>
 
 							<div class="form-group form-text  mr-2 ml-2 ">
 
 								<label for='email'><b>Email</b></label>
-								<input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+								<input type="email" name="email" class="form-control" value="{{user.email}}">
 							</div>
+						
 							<div class="form-group form-text  mr-2 ml-2 ">
 
 								<label for='phone'><b>Phone</b></label>
@@ -65,12 +100,12 @@
 									<option value="3">+701</option>
 									<option value="4">+198</option>
 								</select>
-								<input type="text" class="form-control" name="phone" placeholder="Enter phone" required></p>
+								<input type="text" class="form-control" name="phone"  placeholder="Enter phone" value="{{user.user_profile.phone}}"></p>
 								</div>
 								
 								<div class="form-group form-text  mr-2 ml-2 ">
-									<label for="bio">About You.</label>
-									<textarea  name="bio" rows="6" class="form-control" placeholder="Enter About your Self" ></textarea> 
+									<label for='bio'>Bio</label>
+									<textarea  name="bio" rows="6" class="form-control" placeholder="Enter About your Self" >{{ user.user_profile.bio }}</textarea> 
 								</div>
 								<br>
 								<div class="text-center pb-2"><button type="submit" class="btn btn-success btn-lg">Save</button></div>
@@ -92,7 +127,7 @@
 	
 </div>
 </section>
-
+{%endif%}
 
 
 

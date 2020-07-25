@@ -6,37 +6,37 @@
 			<center class="fixed-bottom">
 
 <!--User Feed -->				
-			<a href="{% url 'feed' %}" >
+			<a href="{% url 'feed' %}" style="text-decoration: none" >
 				<button class="btn btn-lg bg-light  text-center" type="button" > <i class="fas fa-home"></i></button>
 			</a>	
 <!-- Add Post -->			
-			<a href="">
+			<a href="{% url 'post' %}" style="text-decoration: none">
 				<button class="btn btn-lg bg-light  text-center" type="button"> <i class="fas fa-plus"></i>	</button>
 			</a>
 <!--Search-->	
-			<a href="">
-
-				<button class="btn btn-lg bg-light  text-center" type="button"> <i class="fas fa-search"></i></button>
+			<a href="{% url 'search' %}" style="text-decoration: none">
+				<button class="btn btn-lg bg-light  text-center" type="button" > <i class="fas fa-search"></i></button>
 			</a>
+				
 			
 <!--Notification-->
-			<a href="">
+			<a href="" style="text-decoration: none">
 				<button class="btn btn-lg bg-light  text-center" type="button"> <i class="fas fa-bell"></i></button>
 			</a>	
 
 <!--User Profile-->
-			<a href="{% url 'profile' %}">
+			<a href="{% url 'profile' %}" style="text-decoration: none">
 				<button class="btn btn-lg  bg-light text-center" type="button"> <i class="fas fa-user"></i></button>
 			</a>
 
 <!--User Settings-->
-			<a href="">			
+			<a href="{% url 'edit_profile' %}" style="text-decoration: none">			
 			<button class="btn btn-lg bg-light  text-center" type="button"> <i class="fas fa-user-cog"></i></button>
 			</a>
 			
 <!--logout-->	
 
-			<a href="javascript:{document.getElementById('logout').submit()}">		
+			<a href="javascript:{document.getElementById('logout').submit()}" style="text-decoration: none">		
 			<button class="btn btn-lg bg-light  text-center" type="submit"> <i class="fas fa-sign-out-alt"></i>
 				<form action="{%url 'logout' %}" method="POST" id="logout">
                 	{% csrf_token %}
@@ -47,5 +47,5 @@
 
 			
 	</center>
-
+	
 {% endif %}

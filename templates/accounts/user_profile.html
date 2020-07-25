@@ -1,67 +1,127 @@
 {% extends 'base.html' %}
+{%load static%}
+{% load friendshiptags %}
 
 {% block title %}|feed{% endblock %}
 
 
 {% block content %}
-{% if user.is_authenticated %}
+
 <section>
 	<div class="continer bg-light px-2">
 		<div class="row mx-3 pb-2 pt-2">
 			<div class="col-md-3 ">
 
 <!-- Profile-->
-				<div class="card bg-white">
+				<div class="card  border-0"style="background-color: #f39c12; box-shadow: 2px 2px 20px #f39c12; ">
 					<h6 class="card-title mx-2 text-center">Profile</h6>
-						<div class="card-body">
-							<a href="{% url 'profile' %}" class="card-link" >
+						<div class="card-body bg-white">
+							
+								<center>
+									<div  class="rounded-circle">
+
+										{% if user.profile_photo.profile_photo %}
+											<img src="{{user.profile_photo.profile_photo.url}}" class="rounded-circle " >
+										{% else %}
+											<img src="{% static 'img/profile.jpg' %}" class="rounded-circle "> 
+										{% endif %}
+									</div>
+								</center>
+								
 								<p class="text-center"><b>{{user.username}}</b></p>
-							</a>
-							<div class="card-body text-center bg-light" >
+								{% if 'profile' in request.path  %}
+							<div class="card-body text-center " >
 								<a href="{%url 'edit_profile' %}" class="card-link">Edit Profile <i class="fas fa-pen"></i></a>
 							</div>
-							<p><b>Description
-								{{ profile.bio }}
-							</b></p>			 	
+								{% endif %}
+								
+								{% if 'other_user/' in request.path or 'followers/' in request.path or 'other_profile/following/' in request.path%}
+								<div class="card-body text-center " >
+									{% if user in  following %}
+									<form method="POST" action="{% url 'unfollow' pk=user.pk %}">
+										{%csrf_token%}
+										<button type="submit" class="btn btn-secondary">UnFollow</button>
+									</form>
+					
+									{%else%}
+									<form method="POST">
+										{%csrf_token%}
+										<button type="submit" class="btn btn-secondary">Follow</button>
+									</form>
+					
+									{% endif %}
+								</div>
+								{% endif %}
+							
+								<h6>{{ user.first_name }} {{ user.last_name}}</h6>
+								<b>Email:</b><p>{{user.email}}</p>
+								<b>Bio:</b><p>{{ user.user_profile.bio }}</p>
+								<b>phone:</b><p>{{ user.user_profile.phone}}</p>
+												 	
 							</div>
 						</div>
 				</div>
 
 <!--Profile Feed-->
-			<div class="col-md-8 mx-auto">
-				<div class="card bg-white">
-					<div class="card-body">
+			<div class="col-md-8">
+				<div class="card border-0" style="box-shadow: 4px 4px 20px #898694;">
+					<div class="card-body bg-white border-0">
 						<div class="row mx-auto">
-							<div class="col-2 text-center">
+
+							<div class="col-md-2 text-center">
 								<a href="" class="card-link"><h6>Post</h6></a>
-								<p>No. Of Post</p>
+								<p>{{pic.count}}</p>
 							</div>
-							<div class="col-3 text-center">
-								<a href="" class="card-link"><h6>Followers</h6></a>
-								<p>Followers =</p>
 
+							<div class="col-md-3 text-center">
+								<h6>Followers</h6>
+								{% if 'other_user/' in request.path  %}
+								<a href="{% url 'followers_list_pk' pk=user.pk %}" class="btn btn-info card-link text-white">Followers {{count_followers}}</a>
+								{% elif 'profile' in request.path  %}
+								<a href="{% url 'followers_list'  %}" class="btn btn-info card-link text-white">Followers {{count_followers}} </a>
+								{% endif %}
 							</div>
-							<div class="col-3 text-center">
-								<a href="" class="card-link"><h6>Following</h6></a>
-								<p>Followers =</p>
 
+							<div class="col-md-3 text-center">
+								<h6>Following</h6>								
+								{% if 'other_user/' in request.path  %}
+								<a href="{% url 'following_list_pk' pk=user.pk %}" class="btn btn-info card-link text-white">Following{{count_following}}</a>
+								{% elif 'profile' in request.path  %}
+								<a href="{% url 'following_list'  %}" class="btn btn-info card-link text-white">Following {{count_following}} </a>
 
+								{% endif %}
 							</div>
-							<div class="col-3 text-center">
+							<!--
+							<div class="col-sm-3 text-center">
 								<a href="" class="card-link"><h6>Events Participated</h6></a>
-							</div>
+							</div>-->
 					</div>
 			</div>
 		</div>
+		<br>
+		{% block pro_content  %} <!--Block for follower and following content-->
+		<div class="card border-0"style="box-shadow: 4px 4px 20px #898694;">
+			<h5 class="card-title ml-2">Photos</h5>
+			<div class="card-body">
+				<div class="row mx-auto">
+					
+					{% for post in pic %}	
+					<div class="col-sm-3 bg-white " id="post_photos">
+						<a  href="{% url 'comment' pk=post.pk %}"><img src="{{post.photo.url}}"  class="img-responsive"></a>
+					</div>	
+					{% endfor %}
+					
+				</div>				
+			</div>
+		</div>
+		{% endblock %}
 	</div>
-
-</div>
-	
+</div>	
 </div>
 </section>
 
 	
-{% endif %}
+
 
 
 

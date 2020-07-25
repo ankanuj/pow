@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}|search{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section>
+    <div class="container">
+        <div class="row mx-auto">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 pb-4 pt-4">
+                <div class="card" style="box-shadow: 4px 4px 4px darkgray;">
+                    <center><h3 class="card-title pt-2">Search</h3></center>
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data" action="{% url 'search' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group form-text  mr-2 ml-2">
+                                    <input type="text" name="search" class="form-control" placeholder="search">
+                                    </div>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-lg bg-white  text-center" type="submit" > <i class="fas fa-search"></i></button>
+                            </div>
+                         </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-md-10 ml-2">
+                        {% if users %}
+                        {% for user in users %}
+                        <h6>
+                        <a href="{% url 'profile_with_pk' pk=user.pk %}" class="card-link text-dark">
+                            {% if user.profile_photo.profile_photo %}
+                            <img class="rounded-circle" src="{{user.profile_photo.profile_photo.url}}" style="max-width: 50px; max-height: 50px;">
+                            {% else %}
+                            <img class="rounded-circle" src="{% static 'img/profile.jpg' %}" style="max-width: 50px; max-height: 50px;">
+
+                            {% endif %}
+							{{user.username}}
+                            
+                            </a>
+                            </h6>
+                            
+                        {% endfor %}
+                        {% endif %}
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+{% endblock %}

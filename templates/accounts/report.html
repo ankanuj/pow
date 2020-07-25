@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="flex-row">
+        <div class=" col">
+
+        </div>
+        <div class=" col-md-9">
+
+            <div class="card" style="box-shadow:3px 3px 20px lightgray;">
+                <h3 class="card-title">Report User</h3>
+                <h4>Are you sure to report {{ user_details.username }}</h4>
+
+                <form method="POST">
+                    <div class="from-control">
+                        <ul>
+                            <li >Sexuall related</li>
+                            <li >Inapporiate</li>
+                            <li >Spam account</li>
+                            <li >Other</li>
+                        </ul>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

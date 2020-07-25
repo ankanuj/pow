@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section>
+    <div class="row mx-auto">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-9">
+            <div class="container-fluid ">
+                <h3 style="background-color: lightseagreen;">Poems by Some Famous Poet</h3>
+            <div class="card-body border">
+                <img class="img-responsive ml-2 " src="{% static 'img/rabindranath.jpeg' %}" id="poem_img"> 
+                <img class="img-responsive ml-2 " src="{% static 'img/atal.jpg' %}" id="poem_img">
+                <img class="img-responsive ml-2" src="{% static 'img/r1.jpg' %}" id="poem_img">
+               <!-- <img class="img-responsive" src="{% static 'img/swami.jpg' %}" id="poem_img">-->
+
+            </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+    </div>
+</section>
+
+<section id="footer">
+    <!-- Footer -->
+  <footer  class="page-footer font-small bg-light ">
+    <div class="footer-copyright text-center py-3">Copyright &copy;
+        <span class="year"></span>
+        <a href="{% url 'feed' %}"> POW</a>
+     
+    </div>
+     
+    </footer>
+</section>
+{% endblock %}

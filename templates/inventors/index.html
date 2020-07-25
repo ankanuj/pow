@@ -1,39 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
 {% block content %}
 
 <div class="conatiner"style="margin:5px 20px 5px 5px; ">
 	<div class="row text-center pt-md-4 pb-md-2 ml-4 mr-4">
-		
-<!-- Thought of the day section-->
-		<div class="col-md-3 ml-5">
-			<div class="card bg-light" style="height: 500px;">
-				<div class="card-body card-title">
-				<h4 >Performers of Month</h4>
-				<hr class="mr-2 ml-2">
-			</div>
-			</div>
-		</div>
+
 
 <!-- Weekly Best poem section -->
-		<div class="col-md-3 ml-5">
-			<div class="card bg-light" style="height: 500px;">
-				<div class="card-body ">
+		<div class="col-md-6 ml-5 pt-4 bg-white border-0" style=" box-shadow: 4px 4px 20px #898694;">
+			<div class="card bg-white border-0"  style="height: 530px;">
+				<div class="card-body  ">
 				<h4 class="card-title">Poem of the week</h4>
 				<hr class="mr-2 ml-2">
+				<img class="img-responsive" src="{% static 'img/atal1.jpg' %}" >
 			</div>
 			</div>
 				
 		</div>
 
 <!-- Section for LOgin and Singnup -->
-		<div class="col-md-4 ml-5">
-			<div class="card bg-light" >
+		<div class="col-md-4 ml-5 pt-2 pb-2 bg-white border-0" style=" box-shadow: 4px 4px 20px #898694;"">
+			<div class="card bg-white border-0" >
 				<div class="card-body">
 				<h4  class="card-title"> WLECOME WRITERS </h4>
 					<hr class="mr-2 ml-2">
 				</div>
-					<p style="font-family: Segoe UI; font-size: 15px;"><b> Are you a Writers or poet or a good story teller, so Friend this place is for u to express your self.</b></p>
+					<p style="font-family: Segoe UI; font-size: 15px;"><b> Are you a Writer or poet or a good story teller, so Friend this place is for u to express your self.</b></p>
 
 <!-- Login form -->
 			{% include 'partials/_alerts.html'%}
@@ -71,9 +65,9 @@
 					<small id="emailHelp" class="form-text text-muted"><b>Login with</b>
 					</small>
 					<p>
-						<a href="" class="btn btn-danger btn-google"><i class="fab fa-google"></i> Google</a>
+						<a href="{% provider_login_url "google" %}" class="btn btn-danger btn-google"><i class="fab fa-google"></i> Google</a>
 
-						<a href="" class="btn btn-primary btn-facebook"><i class="fab fa-facebook"></i> Facebook</a>
+						<!--<a href="{% provider_login_url "facebook" method="js_sdk" %}" class="btn btn-primary btn-facebook"><i class="fab fa-facebook"></i> Facebook</a>-->
 					</p>
 				
 			</div>	

@@ -1,0 +1,67 @@
+{% extends 'accounts/user_profile.html' %}
+{% load static %}
+{% block pro_content %}
+{% if user.is_authenticated %}
+<div class="card "style="background-color: lightseagreen;">
+    {% if 'following' in request.path %}
+    <h5 class="card-title ml-2">
+         Following 
+    </h5>
+    {% endif %}
+    
+    {% if 'followers' in request.path   %}
+    <h5 class="card-title ml-2">
+        Followers 
+    </h5>
+        {% endif %}
+        
+    
+    <div class="card-body bg-white">
+        {% if 'followers' in request.path %}
+         
+            {% for followers in followers %}
+                {% if followers.profile_photo.profile_photo %}
+                <h6>
+                    <img class="rounded-circle" src="{{followers.profile_photo.profile_photo.url}}" style="min-width: 50px;max-width: 50px; max-height: 50px;">
+                {% else %}
+                    <img class="rounded-circle" src="{% static 'img/profile.jpg' %}" style="min-width: 50px;max-width: 50px; max-height: 50px;">
+                {% endif %}
+                {% if request.user == followers %}
+                    <a href="{% url 'profile' %}">
+        
+                {% else %}
+                    <a href="{%url 'profile_with_pk' pk=followers.pk%}">
+                {% endif %}
+                <b>{{followers}}</b> </a> 
+                 </h6>
+            {% endfor %}
+        {% endif %}
+
+        {% if 'following' in request.path %}
+            {% for all_following in all_following %}
+        
+                {% if all_following.profile_photo.profile_photo %}
+                <h6>
+                    <img class="rounded-circle" src="{{all_following.profile_photo.profile_photo.url}}" style="min-width: 50px;max-width: 50px; max-height: 50px;">
+                {% else %}
+        
+                    <img class="rounded-circle" src="{% static 'img/profile.jpg' %}" style="min-width: 50px;max-width: 50px; max-height: 50px;">
+                {% endif %}
+                
+                {% if request.user == all_following %}
+                <a href="{% url 'profile' %}">
+                {%else%}
+                    <a href="{%url 'profile_with_pk' pk=all_following.pk%}">
+                {% endif %}        
+                <b>{{all_following}}</b>
+                </a>
+               
+                </h6>
+        
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+  {% endif %}  
+{% endblock %}

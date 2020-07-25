@@ -1,7 +1,7 @@
  {% if user.is_authenticated %}
   {% else %}
 <!-- Footer -->
-  <footer  class="page-footer font-small  ">
+  <footer  class="page-footer font-small bg-light ">
    
 <!--footer links-->
 <div class=" container ">
@@ -52,6 +52,11 @@
               <a  href="{% url 'signup'%}">SignUp</a>
             </h6>
           </div>
+          <div class="col-md-2 mb-2 ">
+            <h6 class=" font-weight-bold">
+             <a  href="#">Terms and policies</a>
+           </h6>
+         </div>
    
         
    </div>
@@ -59,7 +64,7 @@
     <!-- Copyright -->
   <div class="footer-copyright text-center py-3">Copyright &copy;
     <span class="year"></span>
-    <a href="{% url 'index' %}"> (:- POW :-)</a>
+    <a href="{% url 'index' %}"> POW</a>
  
 </div>
  

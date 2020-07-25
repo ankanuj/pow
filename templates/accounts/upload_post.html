@@ -1,0 +1,28 @@
+{% extends 'accounts/User_feed.html' %}
+{% load static %}
+{% block title %}|feed{% endblock %}
+
+
+{% block post %}
+{% if user.is_authenticated %}
+    <!-- Upload Post-->
+    <div class="card-body border-0">
+        {% if photo.profile_photo %}
+			<img src="{{photo.profile_photo.url}}" class="rounded-circle" style="min-width: 60px; max-width: 60px; min-height: 40px; min-width: 30px; max-height: 60px; ">
+							
+		{% else %}
+		<img src="{% static 'img/profile.jpg' %}" class="rounded-circle" style="max-width: 60px; min-height: 40px; min-width: 30px; max-height: 60px; ">
+		{% endif %}
+		<b>{{ user.username }}</b> </a> {% if photo %}{{ photo.post_date }}{% endif %}</p>
+        <form action="upload_post" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}  <!-- security -->
+            <div class="form-group form-text  mr-2 ml-2 ">
+                <input type="file" name="upload_post" class="form-control-file ">
+                <br>
+                <button type="submit" class="btn btn-danger" style="float: right;">upload</button>                
+
+            </div>
+        </form>
+    </div>
+{% endif %}
+{% endblock %}

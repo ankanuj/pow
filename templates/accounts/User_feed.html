@@ -1,86 +1,149 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}|feed{% endblock %}
-
-
 {% block content %}
 {% if user.is_authenticated %}
-<section>
-	<div class="continer bg-light px-2">
-		<div class="row mx-3 pb-2 pt-2">
+
+		<div class="row pb-2 pt-2 mr-1">
 			<div class="col-md-3 ">
-		
-
-<!--Suggestions-->
-					<div class="card bg-white ">
-
-						<h5 class="card-titleaa text-center">Suggestions</h5>
-						<hr>
-						<div class=" card-body text-center">
-							<b>See More</b> 	
-
-						</div>
-					</div>
-						<br>
-
-<!-- Events-->
-						<div class="card bg-white">
-							<h6 class="card-title mx-2 text-center">Events</h6>
-							<div class="card-body">
-								<a href="" class="card-link">
-									<b>Poems</b>
-										</a>
-									<br>
-					
-								<a href="" class="card-link">
-									<b> competitive area </b> 	</a>			 
-									<br>	
-								<a href="" class="card-link">
-									<b> Performers of the month</b></a>
+<!-- Events-->	<div class="card  ml-2 mr-2 border-0" style="background-color:#f39c12; box-shadow: 2px 2px 15px 2px  #f39c12;">
+					<h4 class="card-title mx-2 text-center">Events</h4>
+						<div class="card-body bg-white">
+							<a href="{% url 'poems' %}" class="card-link">
+								<b>Poems buy famous poets</b>
+							</a>
+							<br>
+							<!--
+							<a href="" class="card-link">
+								<b> competitive area </b> 	</a>			 
+							<br>	
+							<a href="" class="card-link">
+							<b> Performers of the month</b></a>
+							-->
 							</div>
 						</div>
 						<br>
 
 <!--Footer section -->
-					<div class="card bg-white">
-					<p>
-            				<a  href="{% url 'about'%}">Aboutus</a>
-          					
+					<div class="card ml-2 mr-2" style="box-shadow: 4px 4px 20px #898694;">
+						<div class="card-body bg-white" id="footer">
+            				<p><a  class="card-link" href="{% url 'about'%}">Aboutus</a>
+							  <a class="card-link"  href="{% url 'feed' %}">Home</a>
+          					<a class="ml-2"  href="{% url 'feed' %}">terms and policies</a>
+							  
+          					</p>
 
-          				<p>
-          					<a href="{% url 'feed' %}">Home</a></p></p>
-
-          					<p class="footer-copyright text-center py-3">Copyright &copy;
+          					<p class="footer-copyright py-3">Copyright &copy;
     						<span class="year"></span>
-    						<a href="{% url 'feed' %}"> (:- POW :-)</a>
+    						<a href="{% url 'feed' %}"> POW </a>
 							</p>
-							
- 
+						</div>
 					</div>
-					</div>
+				</div>
 
-			<div class="col-md-7 mx-auto">
-				<div class="card bg-white">
+<!---Middle Content-->
+			<div class="col-md-6 ">
+				<div class="card bg-white" style="box-shadow: 4px 4px 20px #898694;">
 					<div class="card-body">
-						<p><a href="{% url 'profile' %}" class="card-link"><b>{{ user.username }}</b> </a></p>
-						
-								<img style="max-height: 400px; max-width: auto;" src="{% static 'img/lamp.jpg' %}">
-							</div>
-							<div class="card-body">
-								<button type="button" class="btn btn-sm bg-light"><i class="fas fa-comment"></i></button>
-							</div>
+						{% block post %}
+<!--Feed contents of followee-->
+						{% for feed in feed %}
+						<div class="dropdown">
+                            <button type="button" class="btn bg-white " data-toggle="dropdown" style="float:right;"><i class="fas fa-ellipsis-v " style="font-size: 20px;"></i></button>
+                                <div class="dropdown-menu">
+                                    <a type="button" class="btn dropdown-item" href="#">share</a>
+                                    <a type="button" class="btn dropdown-item" href="{% url 'report' pk=feed.user.pk %}">report</a>
+                                </div>
+                        </div>
+							<p><a href="{% url 'profile_with_pk' pk=feed.user_id %}"style="text-decoration: none;">
+								{% if feed.user.profile_photo.profile_photo %}
+									<img src="{{feed.user.profile_photo.profile_photo.url}}" class="rounded-circle" id="user_img2">
+								{% else %}
+									<img src="{% static 'img/profile.jpg' %}" class="rounded-circle" id="user_img2">
+								
+								{% endif %}
+								<b>{{feed}}</b> 
+								</a> 
+								{% if feed.photo %} {{ feed.post_date }} {% endif %}
+								</p>
+								<center>
+									<img class="card-img mx-auto " style=" max-width:600px; max-height: 300px;" src="{{feed.photo.url}}">
+								</center>
+								<div class="card-body">
+									<span style="font-size: 2em; ">
+										<i class="far fa-thumbs-up mr-2"></i>
+										<i class="far fa-comment mr-2"></i>
+										<i class="fas fa-share mr-2"></i>
+								  </span>
+								  <div class="card border-0">
+									<blockquote class="blockquote mb-0">
+				<!--Comment Section-->
+										<div class="container bg-light" id="comment">
+											{%for comment in comment%}
+												{% if comment.post.id == feed.id %}
+													{% if comment.reply %}
+													{%else%}
+													<code style="float: right;">{{comment.com_date}}</code>
+													<h6 class="pt-2">
+														<a href="{% url 'profile_with_pk' pk=feed.user_id %}" style="text-decoration: none;">
+															{% if comment.user.profile_photo.profile_photo %}
+																<img src="{{comment.user.profile_photo.profile_photo.url}}" class="rounded-circle" id="user_img">
+															{% else %}
+																<img src="{% static 'img/profile.jpg' %}" class="rounded-circle" id="user_img">
+															
+															{% endif %}
+															{{comment.user}} 
+														</a> 	
+													</h6>
+													<a class="btn bg-white" type="button" style="float: right;" href="{% url 'comment' pk=feed.pk %}"><b>Reply</b></a>
+													<p class="bg-light ml-3">{{comment.comment}}</p>
+													
+													 <br>
+													{% endif %}
+												{% endif %}
+											{%endfor%}
+										</div>
+										
+									</blockquote>
+										<div class="form-group">
+										  	<a class="btn  bg-hidden  form-control " type="button" href="{% url 'comment' pk=feed.pk %}" >comment</a></p>
+										</div>
+				<!--End Comment-->
+								  </div>
+								</div>	
+						{% endfor %}
+					{% endblock %}
+					</div>
+				</div>
 			</div>
-
-
+				
+<!--Suggestions-->
+		<div class="col-md-3" >
+			{% block suggestions %}		
+			<div class="card mr-3 border-0"style="background-color: #f39c12; box-shadow: 4px 4px 10px 2px #f39c12;">
+				<h3 class="text-center">Suggestions</h3>
+				<div class="card-body bg-white">
+				{% for users in u %}
+				<h6>
+					<a href="{% url 'profile_with_pk' pk=users.pk %}">
+						{% if users.profile_photo.profile_photo %}
+						<img class="rounded-circle" src="{{users.profile_photo.profile_photo.url}}" style="min-width: 50px;max-width: 50px; max-height: 50px;">
+						{% else %}
+						<img class="rounded-circle" src="{% static 'img/profile.jpg' %}" style="max-width: 50px; max-height: 50px;">
+						{% endif %}
+						{{users.username}}
+					</a>
+				</h6>
+				{% endfor %}
+				</div>
+				
+			</div>
+			{% endblock %}
 		</div>
 
-</div>
 	
-</div>
-</section>
 
+</div>
 
 {% endif %}
-
-
 {% endblock %}
