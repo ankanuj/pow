@@ -1,6 +1,6 @@
 
 import os
-
+import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -9,9 +9,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$8n$f&ft4ffi8h$9&@cd6y0uxd)+=ufo6pry7t95rk)u90@3vp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['powerofwriting.herokuapp.com','127.0.0.1:8000']
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
 
 # Application definition
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -94,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'POWER',
         'USER':'postgres',
-        'PASSWORD':'Anuj123',
+        'PASSWORD':'anuj123',
         'HOST':    'localhost',
     }
 }
@@ -142,6 +146,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[ 
     os.path.join(BASE_DIR,'blog_poet/static'),
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #media folder settings
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')

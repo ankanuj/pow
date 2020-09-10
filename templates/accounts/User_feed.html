@@ -5,8 +5,8 @@
 {% if user.is_authenticated %}
 
 		<div class="row pb-2 pt-2 mr-1">
-			<div class="col-md-3 ">
-<!-- Events-->	<div class="card  ml-2 mr-2 border-0" style="background-color:#f39c12; box-shadow: 2px 2px 15px 2px  #f39c12;">
+			<div class="col-md-3 sticky-top">
+<!-- Events-->	<div class="card  ml-2 mr-2 border-0 " style="background-color:#f39c12; box-shadow: 2px 2px 15px 2px  #f39c12;">
 					<h4 class="card-title mx-2 text-center">Events</h4>
 						<div class="card-body bg-white">
 							<a href="{% url 'poems' %}" class="card-link">
@@ -25,7 +25,7 @@
 						<br>
 
 <!--Footer section -->
-					<div class="card ml-2 mr-2" style="box-shadow: 4px 4px 20px #898694;">
+					<div class="card ml-2 mr-2 " style="box-shadow: 4px 4px 20px #898694;">
 						<div class="card-body bg-white" id="footer">
             				<p><a  class="card-link" href="{% url 'about'%}">Aboutus</a>
 							  <a class="card-link"  href="{% url 'feed' %}">Home</a>
@@ -127,9 +127,9 @@
 				<h6>
 					<a href="{% url 'profile_with_pk' pk=users.pk %}">
 						{% if users.profile_photo.profile_photo %}
-						<img class="rounded-circle" src="{{users.profile_photo.profile_photo.url}}" style="min-width: 50px;max-width: 50px; max-height: 50px;">
+						<img class="rounded-circle" src="{{users.profile_photo.profile_photo.url}}" id="user_img2">
 						{% else %}
-						<img class="rounded-circle" src="{% static 'img/profile.jpg' %}" style="max-width: 50px; max-height: 50px;">
+						<img class="rounded-circle" src="{% static 'img/profile.jpg' %}" id="user_img2">
 						{% endif %}
 						{{users.username}}
 					</a>
