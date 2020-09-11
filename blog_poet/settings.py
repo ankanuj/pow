@@ -10,7 +10,7 @@ SECRET_KEY = '$8n$f&ft4ffi8h$9&@cd6y0uxd)+=ufo6pry7t95rk)u90@3vp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['powerofwriting.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['powerofwriting.herokuapp.com/','127.0.0.1']
 
 
 
